@@ -26,6 +26,7 @@ float arrPoints_y[] = new float[numPoints];
 float arrPoints_angle[] = new float[numPoints];
 // float arrPoints_initialRadialDist[] = new float[numPoints];
 float arrPoints_radialDist[] = new float[numPoints];
+float arrPoints_initialVelocity[] = new float[numPoints];
 
 
 int initialSpeedConstant = 100;
@@ -35,16 +36,17 @@ void setup()
   size(400, 400);
   
   for (int i = 0; i < numPoints; i++) {
-    print("i:", i);
-    arrPoints_angle[i] = ((i / numPoints) * TWO_PI); // + random(TWO_PI);
+    // print("i:", i);
+    arrPoints_angle[i] = ((float(i) / float(numPoints)) * TWO_PI) + random(TWO_PI / 30);
     arrPoints_radialDist[i] = 0;
-    // print("  angle:", arrPoints_angle[i]);
+    arrPoints_initialVelocity[i] = random(1.0);
+    print("  angle:", arrPoints_angle[i]);
   }
 }
 
 void update() {
   for (int i = 0; i < numPoints; i++) {
-    arrPoints_radialDist[i] += 0.01;
+    arrPoints_radialDist[i] += arrPoints_initialVelocity[i] * 0.016;
   }
 }
 
@@ -77,9 +79,13 @@ void draw()
     arrPoints_x[i] = x;
     arrPoints_y[i] = y;
     
-    stroke(0);
-    strokeWeight(5.0);
-    stroke(#f72a68);
+    // stroke(0);
+    strokeWeight(6.0);
+    // float alpha = 255.0 * (arrPoints_radialDist[i] / 200);
+    float alpha = 255.0 * exp(-1.0 * arrPoints_radialDist[i] / 60);
+    // print("alpha:", alpha);
+    stroke(#f72a68, alpha);
+    // stroke(247, 42, 104, 100); //, alpha);
     point(x, y);
     // print(x, y);
     
@@ -96,7 +102,7 @@ void draw()
   point(x + 10, y - 10);
   */
   
-  if(frameCount<=numFrames) {
+  if(frameCount <= numFrames) {
     // saveFrame("fr###.gif");
   }
   
