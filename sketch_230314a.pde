@@ -31,13 +31,16 @@ float arrPoints_initialVelocity[] = new float[numPoints];
 
 int initialSpeedConstant = 100;
 
+float getRandomAngleDeviation() {
+  return random(TWO_PI / 30) - random(TWO_PI / 30);
+}
 void setup()
 {
   size(400, 400);
   
   for (int i = 0; i < numPoints; i++) {
     // print("i:", i);
-    arrPoints_angle[i] = ((float(i) / float(numPoints)) * TWO_PI) + random(TWO_PI / 30);
+    arrPoints_angle[i] = ((float(i) / float(numPoints)) * TWO_PI) + getRandomAngleDeviation();
     arrPoints_radialDist[i] = 0;
     arrPoints_initialVelocity[i] = random(1.0);
     print("  angle:", arrPoints_angle[i]);
