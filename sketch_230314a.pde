@@ -35,8 +35,10 @@ void setup()
   size(400, 400);
   
   for (int i = 0; i < numPoints; i++) {
-    arrPoints_angle[i] = ((i / numPoints) * TWO_PI); // + random(TWO_PI / 20);
+    print("i:", i);
+    arrPoints_angle[i] = ((i / numPoints) * TWO_PI); // + random(TWO_PI);
     arrPoints_radialDist[i] = 0;
+    // print("  angle:", arrPoints_angle[i]);
   }
 }
 
@@ -79,7 +81,7 @@ void draw()
     strokeWeight(5.0);
     stroke(#f72a68);
     point(x, y);
-    print(x, y);
+    // print(x, y);
     
     update();
   }
